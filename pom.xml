@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>org.otus</groupId>
-  <artifactId>architect.homework</artifactId>
+  <artifactId>architect</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
@@ -28,7 +28,7 @@
   </dependencyManagement>
 
   <modules>
-    <module>O1_Unit_tests</module>
+    <module>O1-Unit-tests</module>
   </modules>
 
   <build>
