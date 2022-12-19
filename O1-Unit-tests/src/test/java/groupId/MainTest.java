@@ -35,28 +35,12 @@ class MainTest {
         assertEquals(1, Math.abs(result[1]));
     }
 
-    @Test
-    @DisplayName("Cлучай для целых чисел c одним корнем")
-    void oneRootCase() {
-        double[] result = solve(1, 2, 1);
-        assertEquals(1, result.length, "Когда дискриминант равен нулю, корень всегда один");
-        assertEquals(1, Math.abs(result[0]));
-    }
-
-    @Test
-    @DisplayName("Cлучай c одним корнем для чисел с плавающей точкой, изоброжающий округление чисел")
-    void oneRootCaseWithPointer() {
-        double[] result = solve(1, 2.00000001, 1);
-        assertEquals(1, result.length, "Когда дискриминант равен нулю, корень всегда один");
-    }
-
-    @DisplayName("Проверка на то, что уравнение квадратное")
     @ParameterizedTest
-    @ValueSource(doubles = {0, TOO_SMALL_NUMBER})
-    void isQuadraticFormula(double number) {
-        RuntimeException runtimeException = assertThrows(RuntimeException.class, () -> solve(number, 45, 1),
-                "При отрицательном A уравнение не является квадратным");
-        assertTrue(runtimeException.getMessage().contains("a не может быть равна нулю"));
+    @ValueSource(doubles = {2, 2.00000001})
+    @DisplayName("Cлучай c одним корнем")
+    void oneRootCaseWithPointer(double b) {
+        double[] result = solve(1, b, 1);
+        assertEquals(1, result.length, "Когда дискриминант равен нулю, корень всегда один");
     }
 
     @ParameterizedTest
@@ -70,7 +54,9 @@ class MainTest {
         return Stream.of(
                 Arguments.of(Double.NaN, 2, 1),
                 Arguments.of(1,Double.NEGATIVE_INFINITY, 1),
-                Arguments.of(1, 2, Double.POSITIVE_INFINITY)
+                Arguments.of(1, 2, Double.POSITIVE_INFINITY),
+                Arguments.of(0, 2, 1),
+                Arguments.of(8e-10, 2, 1)
         );
     }
 
